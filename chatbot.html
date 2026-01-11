@@ -5,7 +5,7 @@
     <title>Chatbot</title>
 </head>
 
-<body>
+<body style="background-color: rgb(63, 63, 63); color: aliceblue;">
     <div class="js-container"></div>
 
     <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
@@ -19,48 +19,73 @@
         function ChatInput() {
             return (
                 <>
-                    <input placeholder="Send a message to Chatbot" size="30" />
+                    <input
+                        placeholder="Send a message to Chatbot"
+                        size="30"
+                    />
                     <button>Send</button>
                 </>
             );
         }
 
-        function ChatMessage({message, sender}) {
+        function ChatMessage({ message, sender }) {
             // Destrcutring 
             // 1. const message = props.message
             //    const sender = props.sender
             // 2. const {message, sender} = props
             // 3. function ChatMessage({message, sender}) 
 
+            /*
             if (sender === 'robot') {
                 return (
                     <div>
-                        <img src="robot.png" width="40" alt="user image" />
+                        
                         {message}
                     </div>
                 )
             }
+            */
 
             return (
                 <div>
+                    {sender === 'robot' && (
+                        <img src="robot.png" width="40" alt="user image" />
+                    )}
                     {message}
-                    <img src="user.png" width="40" alt="user image" />
+                    {sender === 'user' && (
+                        <img src="user.png" width="40" alt="user image" />
+                    )}
                 </div>
             )
         }
 
-        const app = (
-            <>
-                <ChatInput />
-                <ChatMessage message="hello chatbot" sender="user" />
-                <ChatMessage message="Hello! How can I help you?" sender="robot" />
-                <ChatMessage message="can you get me todays date?" sender="user" />
-                <ChatMessage message="Today is january 11" sender="robot" />
-            </>
-        );
+        function App() {
+            return (
+                <>
+                    <ChatInput />
+                    <ChatMessage
+                        message="hello chatbot"
+                        sender="user"
+                    />
+                    <ChatMessage
+                        message="Hello! How can I help you?"
+                        sender="robot"
+                    />
+                    <ChatMessage
+                        message="can you get me todays date?"
+                        sender="user"
+                    />
+                    <ChatMessage
+                        message="Today is january 11"
+                        sender="robot"
+                    />
+                </>
+            )
+        }
+
 
         const container = document.querySelector('.js-container');
-        ReactDOM.createRoot(container).render(app);
+        ReactDOM.createRoot(container).render(<App/>);
     </script>
 </body>
 
