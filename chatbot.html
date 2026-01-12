@@ -17,15 +17,15 @@
     <script type="text/babel">
 
         function ChatInput() {
-            function saveInpurText() {
-                
+            function saveInpurText(event) {
+                console.log(event.target.value)
             }
             return (
                 <>
                     <input
                         placeholder="Send a message to Chatbot"
                         size="30"
-                        onChange = {}
+                        onChange={saveInpurText}
                     />
                     <button>Send</button>
                 </>
