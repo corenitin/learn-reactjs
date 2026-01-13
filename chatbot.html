@@ -27,17 +27,27 @@
             }
 
             function sendMessage() {
-                setChatMessages([
+                const newChatMessages = [
                     ...chatMessages,
                     {
                         message: inputText,
                         sender: 'user',
                         id: crypto.randomUUID()
                     }
-                ])
+                ]
+                
+                setChatMessages(newChatMessages)
 
                 const response = Chatbot.getResponse(inputText);
-                console.log(response);
+                setChatMessages([
+                    ...newChatMessages,
+                    {
+                        message: response,
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                ])
+
 
 
                 setInputText('')
@@ -80,7 +90,7 @@
             return (
                 <div>
                     {sender === 'robot' && (
-                        <img src="robot.png" width="40" alt="user image" />
+                        <img src="robot.png" width="40" alt="robot image" />
                     )}
                     {message}
                     {sender === 'user' && (
