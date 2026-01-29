@@ -28,6 +28,11 @@
 
 
             async function sendMessage() {
+
+                // We can put this at the top of the function or
+                // after the first setChatMessages(). Both work.
+                setInputText('');
+                
                 const newChatMessages = [
                     ...chatMessages,
                     {
@@ -37,7 +42,17 @@
                     }
                 ]
 
-                setChatMessages(newChatMessages)
+                setChatMessages([
+                    ...newChatMessages,
+                    // This creates a temporary Loading... message.
+                    // Because we don't save this message in newChatMessages,
+                    // it will be remove later, when we add the response.
+                    {
+                        message: 'Loading...',
+                        sender: 'robot',
+                        id: crypto.randomUUID()
+                    }
+                ]);
 
 
                 const response = await Chatbot.getResponseAsync(inputText);
@@ -49,10 +64,6 @@
                         id: crypto.randomUUID()
                     }
                 ])
-
-
-
-                setInputText('')
             }
 
 
@@ -149,6 +160,14 @@
                     message: 'Today is january 11',
                     sender: 'robot',
                     id: '4'
+                }, {
+                    message: 'what is your name?',
+                    sender: 'user',
+                    id: '5'
+                }, {
+                    message: 'I am chithi.',
+                    sender: 'robot',
+                    id: '6'
                 }])
 
             // const [chatMessages, setChatMessages] = array
