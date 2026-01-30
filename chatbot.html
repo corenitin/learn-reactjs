@@ -3,9 +3,35 @@
 
 <head>
     <title>Chatbot</title>
+    <style>
+        .send-button{
+            background-color: rgb(25, 135, 84);
+            color: white;
+            padding: 12px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .chat-input{
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-width: 1px;
+            font-size: 15px;
+            flex-grow: 1;
+        }
+        .chat-input-container{
+            display: flex;
+            
+        }
+        .app-container{
+            max-width: 600px;
+        }
+    </style>
 </head>
 
-<body style="background-color: rgb(63, 63, 63); color: aliceblue;">
+<body>
     <div class="js-container"></div>
 
     <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
@@ -88,19 +114,21 @@
             }
 
             return (
-                <>
+            <div className="chat-input-container">
                     <input
                         placeholder="Send a message to Chatbot"
                         size="30"
                         onChange={saveInputText}
                         onKeyDown={handleKeyDown}
                         value={inputText}
+                        className = "chat-input"
                     //controlled input
                     />
                     <button
                         onClick={sendMessage}
+                        className = "send-button"
                     >Send</button>
-                </>
+                </div>
             );
         }
 
@@ -178,7 +206,7 @@
             // const setChatMessages = array[1];
 
             return (
-                <>
+                <div className="app-container">
                     <ChatInput
                         chatMessages={chatMessages}
                         setChatMessages={setChatMessages}
@@ -186,7 +214,7 @@
                     <ChatMessages
                         chatMessages={chatMessages}
                     />
-                </>
+                </div>
             )
         }
 
