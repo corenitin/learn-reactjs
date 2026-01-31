@@ -75,6 +75,16 @@
             overflow: scroll;
             scrollbar-width: none;
         }
+
+        .welcome-message {
+            color: rgb(120, 120, 120);
+            text-align: center;
+        }
+
+        .loading-gif {
+            height: 40px;
+            margin: -15px;
+        }
     </style>
 </head>
 
@@ -102,16 +112,11 @@
 
 
             async function sendMessage() {
-                if (isLoading || inputText === '') {
-                    return;
-                }
 
-                // Set isLoading to true at the start, and set it to
-                // false after everything is done.
-                setIsLoading(true);
-
-                // We can put this at the top of the function or
-                // after the first setChatMessages(). Both work.
+                // Clear the textbox at the top now because the Chatbot
+                // will take some time to load the response. We want
+                // to clear the textbox immediately rather waiting
+                // for the Chatbot to finish loading.
                 setInputText('');
 
                 const newChatMessages = [
@@ -129,7 +134,7 @@
                     // Because we don't save this message in newChatMessages,
                     // it will be remove later, when we add the response.
                     {
-                        message: 'Loading...',
+                        message: <img src="loading-spinner.gif" className="loading-gif" />,
                         sender: 'robot',
                         id: crypto.randomUUID()
                     }
@@ -148,7 +153,7 @@
                 ])
 
                 // Set isLoading to false after everything is done.
-                setIsLoading(false);
+
             }
 
 
@@ -216,17 +221,29 @@
             )
         }
 
-        function ChatMessages({ chatMessages }) {
+        // To use a function as a hook, the function name must
+        // start with "use".
+        function useAutoScroll(dependencies) {
+            // It's highly recommend to rename this to something
+            // more generic like containerRef. This will make the
+            // code make more sense if we ever reuse this code in
+            // other components.
+            const containerRef = React.useRef(null);
 
-            const chatMessagesRef = React.useRef(null)
 
             React.useEffect(() => {
-                const containerElem = chatMessagesRef.current
+                const containerElem = containerRef.current;
                 if (containerElem) {
                     containerElem.scrollTop = containerElem.scrollHeight;
                 }
 
-            }, [chatMessages])
+            }, dependencies);
+
+            return containerRef;
+        }
+
+        function ChatMessages({ chatMessages }) {
+            const chatMessagesRef = useAutoScroll([chatMessages]);
 
             return (
                 <div className="chat-message-container" ref={chatMessagesRef}>
@@ -245,16 +262,7 @@
 
         function App() {
             // Here we did state lifting from chat component to App.
-            const [chatMessages, setChatMessages] = React.useState([
-                {
-                    message: 'hello chatbot',
-                    sender: 'user',
-                    id: '1'
-                }, {
-                    message: 'Hello! How can I help you?',
-                    sender: 'robot',
-                    id: '2'
-                }])
+            const [chatMessages, setChatMessages] = React.useState([])
 
             // const [chatMessages, setChatMessages] = array
             // const chatMessages = array[0];
@@ -262,6 +270,11 @@
 
             return (
                 <div className="app-container">
+                    {chatMessages.length === 0 && (
+                        <p className="welcome-message">
+                            Welcome to the chatbot project! Send a message using the textbox below.
+                        </p>
+                    )}
                     <ChatMessages
                         chatMessages={chatMessages}
                     />
