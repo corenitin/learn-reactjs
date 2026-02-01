@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect, useRef } from 'react'
+import {Chatbot} from 'supersimpledev'
 import './App.css'
 
 function ChatInput({ chatMessages, setChatMessages }) {
@@ -130,10 +129,10 @@ function useAutoScroll(dependencies) {
   // more generic like containerRef. This will make the
   // code make more sense if we ever reuse this code in
   // other components.
-  const containerRef = React.useRef(null);
+  const containerRef = useRef(null);
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     const containerElem = containerRef.current;
     if (containerElem) {
       containerElem.scrollTop = containerElem.scrollHeight;
