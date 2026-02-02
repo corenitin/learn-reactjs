@@ -40,8 +40,7 @@ export function ChatInput({ chatMessages, setChatMessages }) {
       {
         message: <img src={LoadingSpinner} className="loading-gif" />,
         sender: 'robot',
-        id: crypto.randomUUID(),
-        time: dayjs().valueOf()
+        id: crypto.randomUUID()
       }
     ]);
 
@@ -53,7 +52,8 @@ export function ChatInput({ chatMessages, setChatMessages }) {
       {
         message: response,
         sender: 'robot',
-        id: crypto.randomUUID()
+        id: crypto.randomUUID(),
+        time: dayjs().valueOf()
       }
     ])
 
