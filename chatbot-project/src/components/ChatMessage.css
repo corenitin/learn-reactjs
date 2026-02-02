@@ -12,15 +12,21 @@
 }
 
 .chat-message-text {
-    background-color: rgb(238, 238, 238);
-    padding: 15px 20px;
+    background: linear-gradient(135deg, #0b3a2a, #126b4f);
+    color: #f1f5f9;
+    border: 1px solid rgba(22, 163, 74, 0.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    padding: 12px 16px;
     border-radius: 10px;
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 20px;
-    max-width: 300px;
+    max-width: 250px;
 }
 
 .chat-message-profile {
     width: 45px;
+    height: 45px;
+    border-radius: 45px;
+    object-fit: cover;
 }

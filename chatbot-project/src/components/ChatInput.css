@@ -1,6 +1,7 @@
 .send-button {
-    background-color: rgb(25, 135, 84);
-    color: white;
+    background: linear-gradient(135deg, #22c55e, #15803d);
+    color: #f8fdfc;
+    font-weight: 500;
     padding: 12px 20px;
     margin-left: 10px;
     border: none;
@@ -9,12 +10,25 @@
     cursor: pointer;
 }
 
+.send-button:hover {
+    background: linear-gradient(135deg, #1c7c59, #087731);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 26px rgba(1, 114, 73, 0.55);
+}
+
 .chat-input {
+    background: linear-gradient(135deg, #021f1a, #064635);
+    color: #ecfdf5;
     padding: 12px 15px;
     border-radius: 10px;
     border-width: 1px;
     font-size: 15px;
     flex-grow: 1;
+}
+
+.chat-input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
 }
 
 .chat-input-container {
