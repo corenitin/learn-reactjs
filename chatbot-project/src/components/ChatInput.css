@@ -9,6 +9,17 @@
     font-size: 15px;
     cursor: pointer;
 }
+.clear-button {
+    background-color: #021f1a;
+    color: white;
+    font-weight: 500;
+    padding: 12px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
 
 .send-button:hover {
     background: linear-gradient(135deg, #1c7c59, #087731);

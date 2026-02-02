@@ -11,6 +11,12 @@
 
 }
 
+.chat-message-time {
+  font-size: 12px;
+  color: rgb(170, 168, 168);
+  margin-top: 10px;
+}
+
 .chat-message-text {
     background: linear-gradient(135deg, #0b3a2a, #126b4f);
     color: #f1f5f9;
