@@ -5,6 +5,8 @@ export function CheckoutPage() {
     return (
         <>
             <title>Checkout</title>
+            <link rel="icon" type="image/svg+xml" href="cart-favicon.png" />
+
             <CheckoutHeader />
             <div className="checkout-page">
                 <div className="page-title">Review your order</div>
@@ -134,7 +136,7 @@ export function CheckoutPage() {
                                         </div>
                                     </div>
                                     <div className="delivery-option">
-                                        <input type="radio"  className="delivery-option-input"
+                                        <input type="radio" className="delivery-option-input"
                                             name="delivery-option-2" />
                                         <div>
                                             <div className="delivery-option-date">
