@@ -5,17 +5,16 @@ import './HomePage.css'
 import { ProductsGrid } from './ProductsGrid'
 
 
-export function HomePage({cart}) {
-
+export function HomePage({ cart }) {
 
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.get('/api/products')
-            .then((responce) => {
-                setProducts(responce.data);
-
-            })
+        const getHomeData = async () => {
+            const responce = await axios.get('/api/products')
+            setProducts(responce.data);
+        }
+        getHomeData()
     }, [])
 
 
@@ -26,7 +25,7 @@ export function HomePage({cart}) {
 
             <Header cart={cart} />
             <div className="home-page">
-                <ProductsGrid products={products}/>
+                <ProductsGrid products={products} />
             </div>
         </>
     )
