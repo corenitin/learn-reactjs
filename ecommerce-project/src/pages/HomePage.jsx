@@ -3,23 +3,16 @@ import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
 import './HomePage.css'
 import CheckMark from '../assets/images/icons/checkmark.png'
-import { products } from '../../starting-code/data/products'
 
-export function HomePage() {
+
+export function HomePage({cart}) {
 
     const [products, setProducts] = useState([])
-    const [cart, setCart] = useState([])
 
     useEffect(() => {
         axios.get('/api/products')
             .then((responce) => {
                 setProducts(responce.data);
-
-            })
-
-        axios.get('/api/cart-items')
-            .then((responce) => {
-                setCart(responce.data);
 
             })
     }, [])
@@ -30,7 +23,7 @@ export function HomePage() {
             <title>Ecommerce Project</title>
             <link rel="icon" type="image/svg+xml" href="image.png" />
 
-            <Header cart={cart}/>
+            <Header cart={cart} />
             <div className="home-page">
                 <div className="products-grid">
                     {products.map((product) => {
