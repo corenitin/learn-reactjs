@@ -11,11 +11,11 @@ export function OrdersPage({ cart }) {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-        axios.get('/api/orders?expand=products')
-            .then((responce) => {
-                setOrders(responce.data);
-
-            })
+        const fetchOrdersData = async () => {
+            const responce = await axios.get('/api/orders?expand=products')
+            setOrders(responce.data);
+        }
+        fetchOrdersData()
     }, [])
 
     return (
@@ -60,7 +60,7 @@ export function OrdersPage({ cart }) {
 
                                                 <div className="product-details">
                                                     <div className="product-name">
-                                                       {orderProduct.product.name}
+                                                        {orderProduct.product.name}
                                                     </div>
                                                     <div className="product-delivery-date">
                                                         Arriving on: {dayjs(orderProduct.estimatedDeliveryTimeMs).format('MMMM D')}
