@@ -35,9 +35,20 @@ export function TrackingPage({ cart }) {
     let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100
 
     if (deliveryPercent > 100) {
-        deliveryPercent = 100 
+        deliveryPercent = 100
     }
 
+    let isPreparing;
+    let isShipped;
+    let isDelivered;
+
+    if (deliveryPercent < 33) {
+        isPreparing = deliveryPercent
+    } else if (100 > deliveryPercent >= 33) {
+        isShipped = deliveryPercent
+    } else if (deliveryPercent === 100) {
+        isDelivered = deliveryPercent
+    }
 
     return (
         <>
@@ -52,7 +63,7 @@ export function TrackingPage({ cart }) {
                     </NavLink>
 
                     <div className="delivery-date">
-                        Arriving on {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
+                        {deliveryPercent >= 100 ? 'Delivered on' : 'Arriving on'} {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
                     </div>
 
                     <div className="product-info">
@@ -66,13 +77,13 @@ export function TrackingPage({ cart }) {
                     <img className="product-image" src={orderProduct.product.image} />
 
                     <div className="progress-labels-container">
-                        <div className="progress-label">
+                        <div className={`progress-label ${isPreparing && 'current-status'}`}>
                             Preparing
                         </div>
-                        <div className="progress-label current-status">
+                        <div className={`progress-label ${isShipped && 'current-status'}`}>
                             Shipped
                         </div>
-                        <div className="progress-label">
+                        <div className={`progress-label ${isDelivered && 'current-status'}`}>
                             Delivered
                         </div>
                     </div>
