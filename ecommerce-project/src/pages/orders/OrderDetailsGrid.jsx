@@ -1,6 +1,7 @@
 import BuyAgain from '../../assets/images/icons/buy-again.png'
 import { Fragment } from "react"
 import dayjs from 'dayjs'
+import { NavLink } from 'react-router'
 
 export function OrderDetailsGrid({order}) {
     return (
@@ -29,11 +30,11 @@ export function OrderDetailsGrid({order}) {
                         </div>
 
                         <div className="product-actions">
-                            <a href="/tracking">
+                            <NavLink to={`/tracking/${order.id}/${orderProduct.productId}`}>
                                 <button className="track-package-button button-secondary">
                                     Track package
                                 </button>
-                            </a>
+                            </NavLink>
                         </div>
                     </Fragment>
                 )

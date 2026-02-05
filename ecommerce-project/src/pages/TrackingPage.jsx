@@ -1,13 +1,29 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import { Header } from '../components/Header'
+import { useParams } from 'react-router'
 import './TrackingPage.css'
 
-export function TrackingPage({cart}) {
+export function TrackingPage({ cart }) {
+
+    const { orderId, productId } = useParams()
+
+    useEffect(() => {
+        const fetchTrackingData = async () => {
+            const responce = await axios.get(`/api/orders/${orderId}?expand=products`)
+            productId(responce.data)
+        }
+
+        fetchTrackingData()
+    }, [orderId])
+
+
     return (
         <>
             <title>Tracking</title>
             <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
 
-            <Header cart={cart}/>
+            <Header cart={cart} />
             <div className="tracking-page">
                 <div className="order-tracking">
                     <a className="back-to-orders-link link-primary" href="/orders">
