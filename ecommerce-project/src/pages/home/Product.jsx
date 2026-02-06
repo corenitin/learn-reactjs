@@ -13,6 +13,8 @@ export function Product({ product, loadCart }) {
             quantity: quantity
         })
         await loadCart()
+
+        
     }
 
     const selectQuantity = (event) => {
