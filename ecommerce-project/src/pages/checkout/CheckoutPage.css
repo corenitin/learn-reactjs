@@ -118,6 +118,9 @@
 .checkout-page .product-quantity .link-primary {
   margin-left: 3px;
 }
+.checkout-page .product-quantity .quantity-textbox {
+  width: 50px;
+}
 
 @media (max-width: 1000px) {
   .checkout-page .delivery-options {
