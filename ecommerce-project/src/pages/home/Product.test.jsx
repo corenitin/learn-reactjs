@@ -10,6 +10,7 @@ describe('Product component', () => {
     let product
 
     let loadCart
+    let user
 
     beforeEach(() => {
         product = {
@@ -25,11 +26,12 @@ describe('Product component', () => {
         }
 
         loadCart = vi.fn()
+        user = userEvent.setup()
     })
 
     it('displays the product details correctly', () => {
 
-        render(<Product product={product} loadCart={loadCart} />)
+        render(<Product product={product} loadCart={loadCart} user={user} />)
 
         expect(
             screen.getByText('Black and Gray Athletic Cotton Socks - 6 Pairs')
@@ -57,7 +59,6 @@ describe('Product component', () => {
 
         render(<Product product={product} loadCart={loadCart} />)
 
-        const user = userEvent.setup()
         const addToCartButton = screen.getByTestId('add-to-cart-button')
         await user.click(addToCartButton)
 
@@ -72,10 +73,13 @@ describe('Product component', () => {
         expect(loadCart).toHaveBeenCalled()
     })
 
-    it('selects a quantity',  ()=>{
+    it('selects a quantity', () => {
         render(<Product product={product} loadCart={loadCart} />)
 
-        const quantitySelector =  screen.getByTestId('product-quantity-selector')
+        const quantitySelector = screen.getByTestId('product-quantity-selector')
+        user.selectOptions(quantitySelector, '3')
+        
         expect(quantitySelector).toHaveValue('1')
+
     })
 })
