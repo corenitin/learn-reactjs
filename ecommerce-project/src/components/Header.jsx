@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate, useSearchParams } from 'react-router'
+import { useState } from 'react'
 import '../components/Header.css'
 import CartIcon from '../assets/images/icons/cart-icon.png'
 import LogoWhite from '../assets/images/logo-white.png'
@@ -7,10 +8,28 @@ import SearchIcon from '../assets/images/icons/search-icon.png'
 
 export function Header({ cart }) {
 
-    let totalQuantiy = 0;
+    const navigate = useNavigate()
+
+    const [searchParams] = useSearchParams()
+    // I need to use a different variable name since "search"
+    // is already being used below.
+    const searchText = searchParams.get('search');
+
+    // || '' is a shortcut. It means if searchText does not exist
+    // it will use a default value of ''.
+    const [search, setSearch] = useState(searchText || '');
+    const updateSearchInput = (event) => {
+        setSearch(event.target.value);
+    };
+
+    const searchProducts = () => {
+        navigate(`/?search=${search}`)
+    };
+
+    let totalQuantity = 0;
 
     cart.forEach((cartItem) => {
-        totalQuantiy += cartItem.quantity
+        totalQuantity += cartItem.quantity
     })
     return (
         <>
@@ -25,9 +44,11 @@ export function Header({ cart }) {
                 </div>
 
                 <div className="middle-section">
-                    <input className="search-bar" type="text" placeholder="Search" />
+                    <input className="search-bar" type="text" placeholder="Search"
+                        value={search} onChange={updateSearchInput} />
 
-                    <button className="search-button">
+                    <button className="search-button"
+                        onClick={searchProducts}>
                         <img className="search-icon" src={SearchIcon} />
                     </button>
                 </div>
@@ -40,7 +61,7 @@ export function Header({ cart }) {
 
                     <NavLink className="cart-link header-link" to="/checkout">
                         <img className="cart-icon" src={CartIcon} />
-                        <div className="cart-quantity">{totalQuantiy}</div>
+                        <div className="cart-quantity">{totalQuantity}</div>
                         <div className="cart-text">Cart</div>
                     </NavLink>
                 </div>
