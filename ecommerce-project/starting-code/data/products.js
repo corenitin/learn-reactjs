@@ -30,7 +30,7 @@ export const products = [
       count: 56
     },
     priceCents: 799,
-    keywords: ["tshirts", "apparel", "mens"]
+    keywords: ["t-shirts", "apparel", "mens"]
   },
   {
     id: "54e0eccd-8f36-462b-b68a-8182611d9add",
@@ -228,7 +228,7 @@ export const products = [
       count: 326
     },
     priceCents: 2640,
-    keywords: ["shoes", "flats", "womens", "footwear"]
+    keywords: ["shoes", "flats", "women's", "footwear"]
   },
   {
     id: "8b5a2ee1-6055-422a-a666-b34ba28b76d4",
